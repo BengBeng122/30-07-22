@@ -33,7 +33,7 @@
         		color: #EA80B0;
         		margin: 0;
 				position: absolute;
-				top: 48.5%;
+				top: 47%;
 				left: 50%;
 				-ms-transform: translate(-50%, -50%);
 				transform: translate(-50%, -50%);
@@ -75,33 +75,27 @@
 			</canvas>
 		</canvas>
 		<h2>Meow ❤️ Meow</h2>
-		<!-- <button id="clickme" onclick="switchAudio()">Click me</button> -->
+		<button id="clickme" onclick="switchAudio()">Click me</button>
 		<script>
+			var songs = [
+				"audio/JustGiveMeaReason-PnkNateRuess.mp3",
+				"audio/AThousandYears-christinaperri.mp3",
+				"audio/ImYours-JasonMraz.mp3",
+				"audio/I-Do-911.mp3"
+			];
 			var audio = new Audio();
 			var count = 0;
 
 			function switchAudio() {
-				audio.volume = 0.4;
+				audio.volume = 0.35;
 
 				if(!audio.paused) {
 					audio.pause();
 					audio.load();
 				}
 
-				switch(count) {
-					case 0:
-						audio.src = "audio/JustGiveMeaReason-PnkNateRuess.mp3";
-						count = 1;
-						break;
-					case 1:
-						audio.src = "audio/AThousandYears-christinaperri.mp3";
-						count = 2;
-						break;
-					case 2:
-						audio.src = "audio/ImYours-JasonMraz.mp3";
-						count = 0;
-						break;
-				}
+				audio.src = songs[count++];
+				if(count >= songs.length) count = 0;
 
 				audio.play();
 
@@ -109,22 +103,10 @@
 					audio.onended = function nextAudio() {
 						audio.pause();
 						audio.load();
-						
-						switch(count) {
-							case 0:
-								audio.src = "audio/JustGiveMeaReason-PnkNateRuess.mp3";
-								count = 1;
-								break;
-							case 1:
-								audio.src = "audio/AThousandYears-christinaperri.mp3";
-								count = 2;
-								break;
-							case 2:
-								audio.src = "audio/ImYours-JasonMraz.mp3";
-								count = 0;
-								break;
-						}
 
+						audio.src = songs[count++];
+						if(count >= songs.length) count = 0;
+						
 						audio.play();
 					};
 				}
@@ -133,7 +115,7 @@
 			// Settings
 			var settings = {
 				particles: {
-					length: 1200, // maximum amount of particles
+					length: 1500, // maximum amount of particles
 					duration: 1.5, // particle duration in sec
 					velocity: 135, // particle velocity in pixels/sec
 					effect: -0.35, // play with this for a nice effect
